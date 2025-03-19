@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <style>
+        body {
+            background-color: #2d1b3c;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            position: relative;
+        }
+        .gallery {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+            max-height: 90vh;
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer/Edge */
+            position: fixed;
+            left: 20px;
+            top: 20px;
+        }
+        .gallery::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+        }
+        .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+        .image-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-popup img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+        .close-popup {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        .reasons {
+            width: 50%;
+            background-color: #1f3c1b;
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin-left: 45%;
+        }
+        .reasons ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .reasons li {
+            background-color: #3c5d3b;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="gallery">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350856050936512553/IMG_20250312_020513_399.jpg?ex=67d8eafc&is=67d7997c&hm=91ebee1c9d93797c2bd61f8484028ca080016af67a7ea404b47b5a9f5360a825&" alt="Photo 1" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350856050936512553/IMG_20250312_020513_399.jpg?ex=67d8eafc&is=67d7997c&hm=91ebee1c9d93797c2bd61f8484028ca080016af67a7ea404b47b5a9f5360a825&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350856051251216514/IMG_20250127_225547_869.jpg?ex=67d8eafc&is=67d7997c&hm=7c72904a3e098d8c3de65002651632cf00af201ea3adb6cf27da00c5b7ee5647&" alt="Photo 2" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350856051251216514/IMG_20250127_225547_869.jpg?ex=67d8eafc&is=67d7997c&hm=7c72904a3e098d8c3de65002651632cf00af201ea3adb6cf27da00c5b7ee5647&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350856051657932893/received_7196681240456619.jpg?ex=67d8eafc&is=67d7997c&hm=6081c3b5cc85adfbb4bb610f31de8443dce824a13fb6b04f9b5c355b6da7fa86&" alt="Photo 3" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350856051657932893/received_7196681240456619.jpg?ex=67d8eafc&is=67d7997c&hm=6081c3b5cc85adfbb4bb610f31de8443dce824a13fb6b04f9b5c355b6da7fa86&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350918909456552059/received_1784016902003215.jpg?ex=67d92586&is=67d7d406&hm=21d78d9a74b475595c0c5284acc2b1706845c905a30331c9ac09ccf0b0918fae&" alt="Photo 4" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350918909456552059/received_1784016902003215.jpg?ex=67d92586&is=67d7d406&hm=21d78d9a74b475595c0c5284acc2b1706845c905a30331c9ac09ccf0b0918fae&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350918949943902208/received_453583433819236.jpg?ex=67d92590&is=67d7d410&hm=7de81e77b2e283c5607513beba297957a22aeecaf44837fa70880ce16ea006f1&" alt="Photo 5" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350918949943902208/received_453583433819236.jpg?ex=67d92590&is=67d7d410&hm=7de81e77b2e283c5607513beba297957a22aeecaf44837fa70880ce16ea006f1&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350919019980394646/received_1696803244447644.jpg?ex=67d925a1&is=67d7d421&hm=3765461d8b57f851b5e3a0e44e361663c679b016e0ab668cdefd90e3669122b0&" alt="Photo 6" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350919019980394646/received_1696803244447644.jpg?ex=67d925a1&is=67d7d421&hm=3765461d8b57f851b5e3a0e44e361663c679b016e0ab668cdefd90e3669122b0&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350919046052315299/received_2213783558998585.jpg?ex=67d925a7&is=67d7d427&hm=294c60995233e4cca92450a971a250ecd7e8df7b60fb82fec85462e255bba7b9&" alt="Photo 7" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350919046052315299/received_2213783558998585.jpg?ex=67d925a7&is=67d7d427&hm=294c60995233e4cca92450a971a250ecd7e8df7b60fb82fec85462e255bba7b9&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350927329442005095/IMG_20250312_020235_102.jpg?ex=67d92d5e&is=67d7dbde&hm=1aa3ddfcbfd855f953c2af728eec02b40e4f249ff9848e1a8a794acd98869abf&" alt="Photo 8" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350927329442005095/IMG_20250312_020235_102.jpg?ex=67d92d5e&is=67d7dbde&hm=1aa3ddfcbfd855f953c2af728eec02b40e4f249ff9848e1a8a794acd98869abf&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350927379509547058/Screenshot_20250118-223206_TikTok.jpg?ex=67d92d6a&is=67d7dbea&hm=484b9b7216e06ab59ba095b47eb73e60a48486a881e1aa68b9241f7cc7da07b9&" alt="Photo 9" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350927379509547058/Screenshot_20250118-223206_TikTok.jpg?ex=67d92d6a&is=67d7dbea&hm=484b9b7216e06ab59ba095b47eb73e60a48486a881e1aa68b9241f7cc7da07b9&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350927469296881755/received_1590634521722794.jpg?ex=67d92d7f&is=67d7dbff&hm=5dc78648de296d7b78904cc36ef68e0e1c81b06b24e598a1a41ce2c95270077d&" alt="Photo 10" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350927469296881755/received_1590634521722794.jpg?ex=67d92d7f&is=67d7dbff&hm=5dc78648de296d7b78904cc36ef68e0e1c81b06b24e598a1a41ce2c95270077d&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350927549315940403/20240806_201538.jpg?ex=67d92d92&is=67d7dc12&hm=821fb15e43fed6204df80d9c1ec0205200c5594eaf7f5b469ec37229a896d401&" alt="Photo 11" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350927549315940403/20240806_201538.jpg?ex=67d92d92&is=67d7dc12&hm=821fb15e43fed6204df80d9c1ec0205200c5594eaf7f5b469ec37229a896d401&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350927599534084098/IMG_20250106_011442_056.jpg?ex=67d92d9e&is=67d7dc1e&hm=dde01eabaa3b8e5c34a084cdd462a85f04a16968351ddcd0ea53980d377e959e&" alt="Photo 12" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350927599534084098/IMG_20250106_011442_056.jpg?ex=67d92d9e&is=67d7dc1e&hm=dde01eabaa3b8e5c34a084cdd462a85f04a16968351ddcd0ea53980d377e959e&')">
+    <img src="https://cdn.discordapp.com/attachments/1223707929962745906/1350927648532205691/20250203_143854.jpg?ex=67d92daa&is=67d7dc2a&hm=c8397ab173acf3ea09d1c98ac64cecf886dcf2dd94fc6bdde6846f0f0dfd05ae&" alt="Photo 13" onclick="openPopup('https://cdn.discordapp.com/attachments/1223707929962745906/1350927648532205691/20250203_143854.jpg?ex=67d92daa&is=67d7dc2a&hm=c8397ab173acf3ea09d1c98ac64cecf886dcf2dd94fc6bdde6846f0f0dfd05ae&')">
+</div>
+<div class="image-popup" id="popup">
+    <span class="close-popup" onclick="closePopup()">&times;</span>
+    <img id="popup-img" src="" alt="Popup Image">
+</div>
+<div class="reasons">
+    <h2>100 Reasons Why I Love You</h2>
+    <ul>
+        <li>Your smile makes my day brighter.</li>
+        <li>You always know how to cheer me up.</li>
+        <li>Your kindness inspires me.</li>
+        <li>You are my best friend and my love.</li>
+        <li>You make even the smallest moments special.</li>
+        <li>Your hugs are the warmest place in the world.</li>
+        <li>You believe in me when I doubt myself.</li>
+        <li>Your laugh is the most beautiful sound.</li>
+        <li>You understand me better than anyone.</li>
+        <li>You make my life an adventure.</li>
+        <li>Your eyes sparkle when you talk about what you love.</li>
+        <li>You always support my dreams.</li>
+        <li>Your kindness to others is inspiring.</li>
+        <li>You are my safe place.</li>
+        <li>Every day with you is a blessing.</li>
+        <li>Your voice is soothing and comforting.</li>
+        <li>You never give up on us.</li>
+        <li>You make even rainy days beautiful.</li>
+        <li>Your love makes me a better person.</li>
+        <li>You are my home.</li>
+        <li>You are so talented.</li>
+        <li>Your voice is music to my ears.</li>
+        <li>You never fail to surprise me in the best way.</li>
+        <li>You're such a hard worker.</li>
+        <li>I love the way you make me feel at ease.</li>
+        <li>You're the most caring person I know.</li>
+        <li>You’re so patient with me.</li>
+        <li>You have an amazing ability to forgive.</li>
+        <li>You’ve taught me to be more patient.</li>
+        <li>You help me see the world in a better light.</li>
+        <li>Your love makes me a better person.</li>
+        <li>You bring out the best in me.</li>
+        <li>Your eyes light up when you talk about things you love.</li>
+        <li>I love how you make me feel like I belong.</li>
+        <li>i like watching romance animes</li>
+        <li>You’re always there to share the little moments.</li>
+        <li>You have a way of making everything feel better.</li>
+        <li>Your enthusiasm is always so uplifting.</li>
+        <li>You’re the reason my heart is full.</li>
+        <li>You’re my biggest cheerleader.</li>
+        <li>You always know how to calm me down.</li>
+        <li>You’re so thoughtful in everything you do.</li>
+        <li>You have the most beautiful soul.</li>
+        <li>you make me hard</li>
+        <li>I love how you always make me feel heard.</li>
+        <li>You never stop trying to make things better.</li>
+        <li>I love how you love me.</li>
+        <li>You bring joy wherever you go.</li>
+        <li>I love how you make me feel like I matter.</li>
+        <li>You’re the person I want to spend the rest of my life with.</li>
+        <li>Your love is unconditional.</li>
+        <li>You have such a caring heart.</li>
+        <li>You make me feel like I’m home.</li>
+        <li>Your support means everything to me.</li>
+        <li>I love the way we balance each other.</li>
+        <li>You always make me feel special.</li>
+        <li>I love how you bring out my best qualities.</li>
+        <li>You encourage me to be the best version of myself.</li>
+        <li>I love how you are always honest and genuine.</li>
+        <li>You make life so much more fun.</li>
+        <li>I love how you look at the world with wonder.</li>
+        <li>You have a heart of gold.</li>
+    </ul>
+</div>
+<script>
+    function openPopup(src) {
+        document.getElementById('popup-img').src = src;
+        document.getElementById('popup').style.display = 'flex';
+    }
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+</script>
+</body>
+</html>
